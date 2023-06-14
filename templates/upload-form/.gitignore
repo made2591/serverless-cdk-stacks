@@ -1,0 +1,8 @@
+*.js
+*.d.ts
+node_modules
+
+# CDK asset staging directory
+.cdk.staging
+
+!lib/s3-authorizer/index.js
