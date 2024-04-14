@@ -25,7 +25,7 @@ else
     curl -X PUT -m 5 -f -s -H "Content-Type: multipart/form-data" --upload-file "$ELEMENT_PATH" "$PRESIGNED_URL" &>/dev/null
 
     # this is to test the availability of the object
-    echo "Get presigned url to the test the upload was done..." 
+    echo "Get presigned url to test the upload was done..." 
     PRESIGNED_URL=$(curl -X POST -m 5 -f -s -d "{\"object_key\": \"$ELEMENT_NAME\", \"action\": \"getObject\"}" $API_GATEWAY_ENDPOINT)
     # echo ${PRESIGNED_URL:0:10}...${PRESIGNED_URL:-10}
 

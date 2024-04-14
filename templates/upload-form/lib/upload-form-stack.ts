@@ -5,7 +5,7 @@ import iam = require('aws-cdk-lib/aws-iam');
 import lambda = require('aws-cdk-lib/aws-lambda');
 import s3 = require('aws-cdk-lib/aws-s3');
 import sqs = require('aws-cdk-lib/aws-sqs');
-import os = require('os');
+import * as path from "path";
 
 import { Stage } from '../lib/stage-env/stage-env';
 
@@ -43,11 +43,10 @@ export class UploadFormStack extends cdk.Stack {
     );
 
     // create s3 authorizer lambda
-    const cwd = os.getcwd()
     this.s3AuthLambda = new lambda.Function(this, props.stage.toString() + '-s3-auth', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(os.path.join(cwd, "lib/s3-authorizer")),
+      code: lambda.Code.fromAsset(path.join(__dirname, "./s3-authorizer")),
       environment: { 'S3_BUCKET': this.contentBucket.bucketName },
       initialPolicy: [lambdaS3PolicyStatement]
     })

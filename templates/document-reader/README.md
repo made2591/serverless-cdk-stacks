@@ -50,6 +50,20 @@ and then
 
 ```cdk deploy```
 
+**NOTE**: before proceeding, this stack require you to setup a couple of env variables:
+
+- `READ_CAPACITY`: The read capacity of the dynamodb table to store the translation event;
+- `WRITE_CAPACITY`: The write capacity of the same dynamodb table;
+- `PARTITION_KEY`: The partition key to use for the object stored;
+  
+You can use the following script before running the deploy command above to set reasonable values:
+
+```bash
+export READ_CAPACITY=5
+export WRITE_CAPACITY=1
+export PARTITION_KEY='id'
+```
+
 After a while, the whole stack should be deployed. If this is not true, have a look at AWS CDK output or let me know by opening an issue.
 
 #### Testing things

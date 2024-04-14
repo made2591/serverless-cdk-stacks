@@ -28,7 +28,7 @@ const readCapacity = parseInt(process.env.READ_CAPACITY || "")
 const writeCapacity = parseInt(process.env.WRITE_CAPACITY || "")
 const partitionKey = process.env.PARTITION_KEY || ""
 
-new DocumentReaderStack(app, 'document-reader-stack-'+stage, {
+new DocumentReaderStack(app, 'document-reader-stack-' + stage, {
     stage: stage,
     readCapacity: readCapacity,
     writeCapacity: writeCapacity,

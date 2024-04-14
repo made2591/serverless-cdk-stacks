@@ -27,6 +27,6 @@ switch (process.env.STAGE) {
     }
 }
 
-new UploadFormStack(app, 'upload-form-stack-'+stage, {
+new UploadFormStack(app, 'upload-form-stack-' + stage, {
     stage: stage
 });

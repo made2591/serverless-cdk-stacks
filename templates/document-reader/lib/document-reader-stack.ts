@@ -2,7 +2,7 @@ import cdk = require('aws-cdk-lib');
 import dynamodb = require('aws-cdk-lib/aws-dynamodb');
 import iam = require("aws-cdk-lib/aws-iam");
 import lambda = require("aws-cdk-lib/aws-lambda");
-import os = require('os');
+import * as path from "path";
 
 import { ProducerConsumerStack, ProducerConsumerStackProps } from "../../producer-consumer/lib/producer-consumer-stack";
 
@@ -85,11 +85,10 @@ export class DocumentReaderStack extends ProducerConsumerStack {
     );
 
     // create worker lambda
-    const cwd = os.getcwd()
     this.workerLambda = new lambda.Function(this, props.stage.toString() + "-worker-lambda", {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(os.path.join(cwd, "lib/worker-lambda")),
+      code: lambda.Code.fromAsset(path.join(__dirname, "worker-lambda")),
       timeout: cdk.Duration.seconds(60),
       environment: {
         "DYNAMO_TABLE": this.parsedDocument.tableName,
